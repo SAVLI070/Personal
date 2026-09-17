@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Luxury Showcase Portal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #090a0f;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    p.subtitle {
+      color: #94a3b8;
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.05em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 960px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-4px);
+    }
+    .badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+    .badge-ready { background: #064e3b; color: #6ee7b7; }
+    .badge-warn { background: #78350f; color: #fde68a; }
+    h2 { font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 500; color: #fff; }
+    p.desc { font-size: 0.9rem; color: #94a3b8; line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1; }
+    .btn {
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1>3D Luxury Showcases</h1>
+  <p class="subtitle">Select a project to launch and verify</p>
+  <div class="grid">
+    <a class="card" href="Jewellery/showcase.vulk.space/lumiere-gems/index.html">
+      <span class="badge badge-ready">100% READY</span>
+      <h2>LUMIÈRE — Fine Jewelry</h2>
+      <p class="desc">Diamond & vault 3D scroll video. Includes 11MB video asset, Lenis smooth scroll, and dedicated scrub controller.</p>
+      <span class="btn">Launch Project &rarr;</span>
+    </a>
+    <a class="card" href="Watch%203D/showcase.vulk.space/cronos-watch/index.html">
+      <span class="badge badge-ready">100% READY</span>
+      <h2>CRONOS — Watch Manufacture</h2>
+      <p class="desc">Horology & flying tourbillon 3D scroll video. Includes 13MB video asset and fixed Lenis relative import.</p>
+      <span class="btn">Launch Project &rarr;</span>
+    </a>
+    <a class="card" href="Perfume/showcase.vulk.space/noctis-parfum/index.html">
+      <span class="badge badge-ready">100% READY</span>
+      <h2>NOCTIS — Haute Parfum</h2>
+      <p class="desc">Botanical & flacon layout. Includes 13MB video asset, Lenis smooth scroll, and dedicated scrub controller.</p>
+      <span class="btn">Launch Project &rarr;</span>
+    </a>
+  </div>
+</body>
+</html>

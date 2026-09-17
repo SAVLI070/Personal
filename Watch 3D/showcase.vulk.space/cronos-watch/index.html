@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>CRONOS — Watch Manufacture</title>
+    <meta name="description" content="From the atelier to the polished case. A cinematic CRONOS watchmaking journey." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300..700&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="./assets/index-vbhJhKgR.js?v=2"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Dc0rc3IJ-gsf-v2.css">
+    <link rel="stylesheet" crossorigin href="./product-carousel.css?v=6">
+  </head>
+  <body>
+    <div id="root"></div>
+  <script type="module">/* vulk:lenis-smooth-scroll v2 */
+import Lenis from "../_lib/lenis.mjs";
+// Framer-style inertial smoothing. Guards: mouse-only, respects
+// prefers-reduced-motion, and only arms when the page actually scrolls
+// (3D wheel-zoom viewers and dashboards stay untouched).
+if (matchMedia("(pointer: fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let armed = false;
+  const arm = () => {
+    if (armed || document.documentElement.scrollHeight <= innerHeight + 80) return;
+    armed = true;
+    const lenis = new Lenis({ smoothWheel: true });
+    const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+    document.documentElement.style.scrollBehavior = "auto";
+  };
+  addEventListener("load", () => { setTimeout(arm, 800); setTimeout(arm, 2500); setTimeout(arm, 6000); });
+}
+</script>
+  <script src="./scroll-video.js?v=2"></script>
+  <script src="./product-carousel.js?v=6"></script>
+</body>
+</html>
