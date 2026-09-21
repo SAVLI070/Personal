@@ -695,19 +695,30 @@
     wakeBentoLoop();
   }
 
+  // Remove gallery section permanently across all projects
+  function removeGallerySection() {
+    const galleries = document.querySelectorAll('#gallery, .gallery, section#gallery, section.gallery, section[id="gallery"]');
+    galleries.forEach(el => {
+      el.remove();
+    });
+  }
+
   // Ensure scrubbers mount cleanly
   function init() {
+    removeGallerySection();
     setupHeroMilestoneScrubber();
     setupBentoBoxScrubber();
 
     const interval = setInterval(() => {
+      removeGallerySection();
       setupHeroMilestoneScrubber();
       setupBentoBoxScrubber();
     }, 200);
     setTimeout(() => clearInterval(interval), 4000);
 
-    // Mutation observer to re-inject in stage if React re-renders root
+    // Mutation observer to re-inject in stage if React re-renders root and purge gallery
     const observer = new MutationObserver(() => {
+      removeGallerySection();
       const stage = document.querySelector('.stage');
       if (stage) {
         if (!stage.querySelector('#hero-product-scrub')) setupHeroMilestoneScrubber();
@@ -718,8 +729,12 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => {
+      removeGallerySection();
+      init();
+    });
   } else {
+    removeGallerySection();
     init();
   }
 })();
