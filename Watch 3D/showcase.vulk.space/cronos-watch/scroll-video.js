@@ -85,34 +85,13 @@
     video.addEventListener('durationchange', updateTargetTime);
     updateTargetTime();
 
+    // Note: Video scrubbing is driven by the application's master loop.
+    // Preloading as blob ensures instant seeks without byte-range stalls.
+    /*
     const LERP_FACTOR = 0.15;
-
-    function renderScrubLoop() {
-      const duration = video.duration || 0;
-      if (duration > 0) {
-        currentTime += (targetTime - currentTime) * LERP_FACTOR;
-
-        if (Math.abs(targetTime - currentTime) < 0.001) {
-          currentTime = targetTime;
-        }
-
-        const boundedTime = Math.max(0, Math.min(duration - 0.001, currentTime));
-
-        if (Math.abs(video.currentTime - boundedTime) > 0.003) {
-          try {
-            if ('fastSeek' in video) {
-              video.fastSeek(boundedTime);
-            } else {
-              video.currentTime = boundedTime;
-            }
-          } catch (err) {}
-        }
-      }
-
-      requestAnimationFrame(renderScrubLoop);
-    }
-
+    function renderScrubLoop() { ... }
     requestAnimationFrame(renderScrubLoop);
+    */
   }
 
   if (document.readyState === 'loading') {

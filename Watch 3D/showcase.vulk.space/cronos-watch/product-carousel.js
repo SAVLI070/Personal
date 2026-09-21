@@ -454,17 +454,41 @@
       }
     }
 
-    function heroRenderLoop() {
-      if (!heroTrack || !document.contains(heroTrack)) return;
-      heroCurrentX += (heroTargetX - heroCurrentX) * 0.14;
-      heroTrack.style.transform = `translateX(${heroCurrentX.toFixed(2)}px)`;
-      requestAnimationFrame(heroRenderLoop);
-    }
-    requestAnimationFrame(heroRenderLoop);
+    let isHeroLoopRunning = false;
 
-    window.addEventListener('scroll', updateHeroScrub, { passive: true });
-    window.addEventListener('resize', updateHeroScrub, { passive: true });
+    function heroRenderLoop() {
+      if (!heroTrack || !document.contains(heroTrack)) {
+        isHeroLoopRunning = false;
+        return;
+      }
+      
+      const diff = heroTargetX - heroCurrentX;
+      heroCurrentX += diff * 0.28;
+      
+      if (Math.abs(diff) < 0.15) {
+        heroCurrentX = heroTargetX;
+      }
+      
+      heroTrack.style.transform = `translate3d(${heroCurrentX.toFixed(1)}px, 0, 0)`;
+
+      if (Math.abs(heroTargetX - heroCurrentX) >= 0.15 || overlay.classList.contains('visible')) {
+        requestAnimationFrame(heroRenderLoop);
+      } else {
+        isHeroLoopRunning = false;
+      }
+    }
+
+    function wakeHeroLoop() {
+      if (!isHeroLoopRunning) {
+        isHeroLoopRunning = true;
+        requestAnimationFrame(heroRenderLoop);
+      }
+    }
+
+    window.addEventListener('scroll', () => { updateHeroScrub(); wakeHeroLoop(); }, { passive: true });
+    window.addEventListener('resize', () => { updateHeroScrub(); wakeHeroLoop(); }, { passive: true });
     updateHeroScrub();
+    wakeHeroLoop();
   }
 
   // 2. Setup Bento Box Section (Line-by-Line Staggered Arrival Scrubbed by Scroll)
@@ -554,6 +578,7 @@
     // Values for smooth LERP scrubbing
     let curE1 = 0, curE2 = 0, curE3 = 0, curMaster = 0;
     let targetE1 = 0, targetE2 = 0, targetE3 = 0, targetMaster = 0;
+    let isBentoLoopRunning = false;
 
     function updateBentoScrub() {
       if (!heroSection) return;
@@ -610,15 +635,18 @@
     }
 
     function bentoRenderLoop() {
-      if (!overlay || !document.contains(overlay)) return;
+      if (!overlay || !document.contains(overlay)) {
+        isBentoLoopRunning = false;
+        return;
+      }
 
-      // Smooth dampening
-      curMaster += (targetMaster - curMaster) * 0.18;
-      curE1 += (targetE1 - curE1) * 0.16;
-      curE2 += (targetE2 - curE2) * 0.16;
-      curE3 += (targetE3 - curE3) * 0.16;
+      // Fast, responsive dampening without sluggish lag
+      curMaster += (targetMaster - curMaster) * 0.28;
+      curE1 += (targetE1 - curE1) * 0.25;
+      curE2 += (targetE2 - curE2) * 0.25;
+      curE3 += (targetE3 - curE3) * 0.25;
 
-      if (curMaster < 0.002) {
+      if (curMaster < 0.003) {
         overlay.style.opacity = '0';
         overlay.style.pointerEvents = 'none';
         overlay.style.visibility = 'hidden';
@@ -626,31 +654,45 @@
         overlay.style.visibility = 'visible';
         overlay.style.opacity = curMaster.toFixed(3);
         overlay.style.pointerEvents = curMaster > 0.4 ? 'auto' : 'none';
-        overlay.style.transform = `translateY(${((1 - curMaster) * -20).toFixed(1)}px)`;
+        overlay.style.transform = `translate3d(0, ${((1 - curMaster) * -16).toFixed(1)}px, 0)`;
 
-        // Line 1: Staggered entrance
+        // Line 1: Pure GPU transform & opacity (NO rasterizing blur filter)
         row1.style.opacity = curE1.toFixed(3);
-        row1.style.transform = `translateY(${((1 - curE1) * 48).toFixed(1)}px) scale(${(0.95 + 0.05 * curE1).toFixed(3)})`;
-        row1.style.filter = `blur(${((1 - curE1) * 6).toFixed(1)}px)`;
+        row1.style.transform = `translate3d(0, ${((1 - curE1) * 36).toFixed(1)}px, 0) scale(${(0.97 + 0.03 * curE1).toFixed(3)})`;
 
-        // Line 2: Staggered entrance
+        // Line 2: Pure GPU transform & opacity
         row2.style.opacity = curE2.toFixed(3);
-        row2.style.transform = `translateY(${((1 - curE2) * 48).toFixed(1)}px) scale(${(0.95 + 0.05 * curE2).toFixed(3)})`;
-        row2.style.filter = `blur(${((1 - curE2) * 6).toFixed(1)}px)`;
+        row2.style.transform = `translate3d(0, ${((1 - curE2) * 36).toFixed(1)}px, 0) scale(${(0.97 + 0.03 * curE2).toFixed(3)})`;
 
-        // Line 3: Staggered entrance
+        // Line 3: Pure GPU transform & opacity
         row3.style.opacity = curE3.toFixed(3);
-        row3.style.transform = `translateY(${((1 - curE3) * 48).toFixed(1)}px) scale(${(0.95 + 0.05 * curE3).toFixed(3)})`;
-        row3.style.filter = `blur(${((1 - curE3) * 6).toFixed(1)}px)`;
+        row3.style.transform = `translate3d(0, ${((1 - curE3) * 36).toFixed(1)}px, 0) scale(${(0.97 + 0.03 * curE3).toFixed(3)})`;
       }
 
-      requestAnimationFrame(bentoRenderLoop);
-    }
-    requestAnimationFrame(bentoRenderLoop);
+      const isStillAnimating = Math.abs(targetMaster - curMaster) >= 0.003 ||
+                               Math.abs(targetE1 - curE1) >= 0.003 ||
+                               Math.abs(targetE2 - curE2) >= 0.003 ||
+                               Math.abs(targetE3 - curE3) >= 0.003 ||
+                               overlay.classList.contains('visible');
 
-    window.addEventListener('scroll', updateBentoScrub, { passive: true });
-    window.addEventListener('resize', updateBentoScrub, { passive: true });
+      if (isStillAnimating) {
+        requestAnimationFrame(bentoRenderLoop);
+      } else {
+        isBentoLoopRunning = false;
+      }
+    }
+
+    function wakeBentoLoop() {
+      if (!isBentoLoopRunning) {
+        isBentoLoopRunning = true;
+        requestAnimationFrame(bentoRenderLoop);
+      }
+    }
+
+    window.addEventListener('scroll', () => { updateBentoScrub(); wakeBentoLoop(); }, { passive: true });
+    window.addEventListener('resize', () => { updateBentoScrub(); wakeBentoLoop(); }, { passive: true });
     updateBentoScrub();
+    wakeBentoLoop();
   }
 
   // Ensure scrubbers mount cleanly
