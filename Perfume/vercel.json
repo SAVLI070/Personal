@@ -1,0 +1,21 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/showcase.vulk.space/noctis-parfum/:path*",
+      "destination": "/showcase.vulk.space/noctis-parfum/:path*"
+    },
+    {
+      "source": "/showcase.vulk.space/_lib/:path*",
+      "destination": "/showcase.vulk.space/_lib/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/showcase.vulk.space/noctis-parfum/:path*"
+    },
+    {
+      "source": "/",
+      "destination": "/showcase.vulk.space/noctis-parfum/index.html"
+    }
+  ]
+}

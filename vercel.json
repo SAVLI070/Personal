@@ -1,0 +1,29 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/jewellery/:path*",
+      "destination": "/Jewellery/showcase.vulk.space/lumiere-gems/:path*"
+    },
+    {
+      "source": "/jewellery",
+      "destination": "/Jewellery/showcase.vulk.space/lumiere-gems/index.html"
+    },
+    {
+      "source": "/watch/:path*",
+      "destination": "/Watch%203D/showcase.vulk.space/cronos-watch/:path*"
+    },
+    {
+      "source": "/watch",
+      "destination": "/Watch%203D/showcase.vulk.space/cronos-watch/index.html"
+    },
+    {
+      "source": "/perfume/:path*",
+      "destination": "/Perfume/showcase.vulk.space/noctis-parfum/:path*"
+    },
+    {
+      "source": "/perfume",
+      "destination": "/Perfume/showcase.vulk.space/noctis-parfum/index.html"
+    }
+  ]
+}

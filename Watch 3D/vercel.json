@@ -1,0 +1,21 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/showcase.vulk.space/cronos-watch/:path*",
+      "destination": "/showcase.vulk.space/cronos-watch/:path*"
+    },
+    {
+      "source": "/showcase.vulk.space/_lib/:path*",
+      "destination": "/showcase.vulk.space/_lib/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/showcase.vulk.space/cronos-watch/:path*"
+    },
+    {
+      "source": "/",
+      "destination": "/showcase.vulk.space/cronos-watch/index.html"
+    }
+  ]
+}
