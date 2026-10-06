@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>LUMIÈRE — Fine Jewelry</title>
+    <meta name="description" content="From light and caustics to the vault. A cinematic LUMIÈRE jewelry journey." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300..700&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="./assets/index-B3B9iMVA.js?v=2"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DaO1zcnz-gsf-v2.css">
+    <link rel="stylesheet" crossorigin href="./product-carousel.css?v=7">
+  </head>
+  <body>
+    <div id="root"></div>
+  <script type="module">
+import Lenis from "./_lib/lenis.mjs";
+const lenis = new Lenis({
+  lerp: 0.1,
+  wheelMultiplier: 1.0,
+  touchMultiplier: 1.2,
+  smoothWheel: true
+});
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+document.documentElement.style.scrollBehavior = "auto";
+</script>
+  <script src="./scroll-video.js?v=8"></script>
+  <script src="./product-carousel.js?v=8"></script>
+</body>
+</html>

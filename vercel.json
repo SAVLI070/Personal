@@ -3,27 +3,27 @@
   "rewrites": [
     {
       "source": "/jewellery/:path*",
-      "destination": "/Jewellery/showcase.vulk.space/lumiere-gems/:path*"
+      "destination": "/Jewellery/:path*"
     },
     {
       "source": "/jewellery",
-      "destination": "/Jewellery/showcase.vulk.space/lumiere-gems/index.html"
+      "destination": "/Jewellery/index.html"
     },
     {
       "source": "/watch/:path*",
-      "destination": "/Watch%203D/showcase.vulk.space/cronos-watch/:path*"
+      "destination": "/Watch%203D/:path*"
     },
     {
       "source": "/watch",
-      "destination": "/Watch%203D/showcase.vulk.space/cronos-watch/index.html"
+      "destination": "/Watch%203D/index.html"
     },
     {
       "source": "/perfume/:path*",
-      "destination": "/Perfume/showcase.vulk.space/noctis-parfum/:path*"
+      "destination": "/Perfume/:path*"
     },
     {
       "source": "/perfume",
-      "destination": "/Perfume/showcase.vulk.space/noctis-parfum/index.html"
+      "destination": "/Perfume/index.html"
     }
   ]
 }

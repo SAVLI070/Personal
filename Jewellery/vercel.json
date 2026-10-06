@@ -1,21 +1,3 @@
 {
-  "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/showcase.vulk.space/lumiere-gems/:path*",
-      "destination": "/showcase.vulk.space/lumiere-gems/:path*"
-    },
-    {
-      "source": "/showcase.vulk.space/_lib/:path*",
-      "destination": "/showcase.vulk.space/_lib/:path*"
-    },
-    {
-      "source": "/:path*",
-      "destination": "/showcase.vulk.space/lumiere-gems/:path*"
-    },
-    {
-      "source": "/",
-      "destination": "/showcase.vulk.space/lumiere-gems/index.html"
-    }
-  ]
+  "cleanUrls": true
 }
